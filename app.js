@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id),img=s=>`https://cdn.cloudflare.steamstat
 let history=[];try{history=JSON.parse(localStorage.getItem('vokercast-runs')||'[]');if(!Array.isArray(history))history=[]}catch{}let queue=[],index=0,orbs=[],active=false,started=0,last=0,errors=0,attempts=0,rows=[],elapsed=0;
 const rankId=ms=>{const sec=ms/1000;return sec<7?8:sec<8?7:sec<9?6:sec<10?5:sec<15?4:sec<20?3:sec<25?2:1};
 const rank=ms=>["","Рекрут","Страж","Рыцарь","Герой","Легенда","Властелин","Божество","Титан"][rankId(ms)];
-const medal=ms=>`<img class="rank-medal" src="rank-${rankId(ms)}.png" alt="${rank(ms)}" title="${rank(ms)}" width="64" height="64">`;
+const medal=ms=>`<span class="medal-label"><img class="rank-medal" src="rank-${rankId(ms)}.png" alt="${rank(ms)}" title="${rank(ms)}" width="64" height="64"><small>${rank(ms)}</small></span>`;
 const time=ms=>`${String(Math.floor(ms/60000)).padStart(2,'0')}:${(ms/1000%60).toFixed(2).padStart(5,'0')}`;
 function records(){const best=history.length?Math.min(...history.map(r=>r.time)):null;$('best').textContent=best===null?'—':time(best);$('history').innerHTML=history.length?`<table><thead><tr><th>Дата</th><th>Время</th><th>Точность</th><th>Звание</th><th>Ошибки</th></tr></thead><tbody>${history.map(r=>`<tr><td>${new Date(r.date).toLocaleString('ru-RU')}</td><td>${time(r.time)}</td><td>${r.accuracy}%</td><td>${medal(r.time)}</td><td>${r.errors}</td></tr>`).join('')}</tbody></table>`:'<h2>Твой первый рекорд впереди</h2><p class="muted">Пройди 10 заклинаний — результат сохранится здесь.</p>'}records();
 $('spells').innerHTML=spells.map((s,i)=>`<div class="spell-row" id="spell-${i}"><img src="${img(s)}" alt="" loading="lazy"><b>${s[0]}</b>${keys(s[1])}</div>`).join('');
