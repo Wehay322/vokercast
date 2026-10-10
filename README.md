@@ -1,6 +1,7 @@
 # Vokercast
+
 Тренажёр заклинаний Invoker: 10 случайных кастов, секундомер, условные звания и сборки.
 
-Сайт: https://vokercast.ilha-tarasow.chatgpt.site
+Сайт: https://wehay322.github.io/vokercast/
 
 Запуск: откройте index.html в браузере или запустите статический HTTP-сервер.
